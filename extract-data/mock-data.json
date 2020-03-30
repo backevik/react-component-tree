@@ -1,0 +1,24 @@
+{
+  "name": "MOCK DATA",
+  "parent": "null",
+  "children": [
+    {
+      "name": "Component A",
+      "parent": "MOCK DATA",
+      "children": [
+        {
+          "name": "Component A1",
+          "parent": "Component A"
+        },
+        {
+          "name": "Component A2",
+          "parent": "Component A"
+        }
+      ]
+    },
+    {
+      "name": "Component B",
+      "parent": "MOCK DATA"
+    }
+  ]
+}

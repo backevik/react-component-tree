@@ -1,0 +1,38 @@
+{
+  "name": "react-component-tree",
+  "version": "0.0.1",
+  "description": "Tool to visualize component tree of a react app",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config ./config/webpack.prod.js",
+    "extract": "node ./extract-data",
+    "start": "webpack-dev-server --open --config ./config/webpack.dev.js --hot"
+  },
+  "author": "Andreas Bäckevik",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "autoprefixer": "^9.7.5",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.4.2",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.0.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.9.4",
+    "d3": "^5.15.0"
+  }
+}
