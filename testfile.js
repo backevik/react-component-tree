@@ -3,9 +3,6 @@ export const Welcome = props => {
     <div>
       <div>
         <p>dawwadwad</p>
-        <div>
-          <span>awdwad</span>
-        </div>
         <p>HEJ</p>
       </div>
       <h1>Hello, {props.name}</h1>

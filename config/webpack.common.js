@@ -10,13 +10,6 @@ module.exports = {
     path: path.resolve(process.cwd(), 'dist'),
     filename: 'bundle.js',
   },
-  devServer: {
-    stats: {
-      children: false,
-      maxModules: 0,
-    },
-    port: 1337,
-  },
   module: {
     rules: [
       {
