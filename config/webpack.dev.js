@@ -10,5 +10,6 @@ module.exports = merge(common, {
       maxModules: 0,
     },
     port: 1337,
+    contentBase: '../dist',
   },
 });

@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config ./config/webpack.prod.js",
-    "extract": "node ./extract-data",
-    "start": "webpack-dev-server --open --config ./config/webpack.dev.js --hot"
+    "parse": "node ./extract-data",
+    "dev": "webpack-dev-server --open --config ./config/webpack.dev.js --hot",
+    "extract": "node index.js"
   },
   "author": "Andreas Bäckevik",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",

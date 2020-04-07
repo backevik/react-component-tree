@@ -25,15 +25,7 @@ const parse = (file) => {
     plugins: ['jsx'],
   });
   const initialAst = ast.program.body.find((astNode) => astNode.type === 'ExportNamedDeclaration').declaration.declarations[0].init.body.body[0].argument;
-  fs.writeFileSync('./data.json', JSON.stringify(reduceAstNode([], initialAst)[0]));
-};
-
-const getArg = () => {
-  const args = process.argv.slice(2);
-  if (args.length) {
-    return args[0];
-  }
-  throw new Error('Invalid argument provided');
+  fs.writeFileSync('./src/static/app-data.json', JSON.stringify(reduceAstNode([], initialAst)[0]));
 };
 
 const getRootComponent = (name) => {
@@ -46,4 +38,4 @@ const getRootComponent = (name) => {
   }
 };
 
-getRootComponent(getArg());
+getRootComponent(process.argv[2]);
