@@ -22,9 +22,7 @@ const getOutputPath = () => {
     return path.resolve(process.cwd(), folder);
   }
   // default output folder
-
-  // TODO: IF FOLDER DOES NOT EXIST CREATE IT!
-  return path.resolve(process.cwd(), 'dist');
+  return path.resolve(process.cwd(), 'reports/component-tree');
 }
 
 execSync(`yarn parse ${getArg()}`, { stdio: [0, 1, 2] });
