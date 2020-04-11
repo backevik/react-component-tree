@@ -15,6 +15,7 @@ const reduceAstNode = (oldNode, currentNode) => {
       ? reduceAstNode(element.children, node)
       : reduceAstNode(oldNode, node)));
   }
+
   return oldNode;
 };
 
@@ -24,8 +25,13 @@ const parse = (file) => {
     sourceType: 'module',
     plugins: ['jsx'],
   });
-  const initialAst = ast.program.body.find((astNode) => astNode.type === 'ExportNamedDeclaration').declaration.declarations[0].init.body.body[0].argument;
-  fs.writeFileSync('./src/static/app-data.json', JSON.stringify(reduceAstNode([], initialAst)[0]));
+  const initialAst = ast.program.body.find(
+    (astNode) => astNode.type === 'ExportNamedDeclaration',
+  ).declaration.declarations[0].init.body.body[0].argument;
+  fs.writeFileSync(
+    './src/static/app-data.json',
+    JSON.stringify(reduceAstNode([], initialAst)[0]),
+  );
 };
 
 const getRootComponent = (path) => {
@@ -33,24 +39,27 @@ const getRootComponent = (path) => {
   let files = [];
   let fileName = '';
   // root component is at root level
-  if(pathTree.length === 1) {
+  if (pathTree.length === 1) {
     files = fs.readdirSync('.');
-    fileName = pathTree[0];
-  // else path contains folders
+    [fileName] = pathTree;
+    // else path contains folders
   } else {
-    const pathToRootComponent = pathTree.slice(0, pathTree.length - 1).join('/');
+    const pathToRootComponent = pathTree
+      .slice(0, pathTree.length - 1)
+      .join('/');
     files = fs.readdirSync(`./${pathToRootComponent}`);
     fileName = pathTree[pathTree.length - 1];
   }
   // check if input file type is valid
-  const fileIsValid = files.some((name) => 
-    fileName.includes('js') || 
-    fileName.includes('jsx') && 
-    name === fileName);
+  const fileIsValid = files.some(
+    (name) => fileName.includes('js') || (fileName.includes('jsx') && name === fileName),
+  );
   if (fileIsValid) {
     parse(path);
   } else {
-    throw new Error('ERROR: Root component not found. Are you sure you are in the right folder?');
+    throw new Error(
+      'ERROR: Root component not found. Are you sure you are in the right folder?',
+    );
   }
 };
 
