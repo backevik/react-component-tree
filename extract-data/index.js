@@ -3,7 +3,13 @@ const fs = require('fs');
 
 const reduceAstNode = (oldNode, currentNode) => {
   let element = {};
-  if (currentNode.type === 'JSXElement') {
+  if (currentNode.openingElement && currentNode.openingElement.name.name === 'Route') {
+    const routeComponent = currentNode.openingElement.attributes.find((attr) => attr.name.name === 'component');
+    oldNode.push({
+      name: routeComponent.value.expression.name,
+      children: [],
+    });
+  } else if (currentNode.type === 'JSXElement') {
     element = {
       name: currentNode.openingElement.name.name,
       children: [],
@@ -25,12 +31,16 @@ const parse = (file) => {
     sourceType: 'module',
     plugins: ['jsx'],
   });
-  const initialAst = ast.program.body.find(
-    (astNode) => astNode.type === 'ExportNamedDeclaration',
-  ).declaration.declarations[0].init.body.body[0].argument;
+  const initialAst = ast.program.body.find((astNode) => astNode.type === 'ExportNamedDeclaration' || astNode.type === 'ExportDefaultDeclaration');
+  let rootNode = null;
+  if (initialAst.declaration.declarations) { // default export
+    rootNode = initialAst.declaration.declarations[0].init.body.body[0].argument;
+  } else { // named export
+    rootNode = initialAst.declaration.body.body[0].argument;
+  }
   fs.writeFileSync(
     './src/static/app-data.json',
-    JSON.stringify(reduceAstNode([], initialAst)[0]),
+    JSON.stringify(reduceAstNode([], rootNode)[0]),
   );
 };
 
